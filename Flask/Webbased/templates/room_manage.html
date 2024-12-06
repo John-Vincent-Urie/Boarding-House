@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management</title>
+    <style>
+        .room-container {
+            display: inline-block;
+            position: relative;
+            margin: 10px;
+        }
+
+        .room-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-button {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+        }
+
+        .room-table {
+            display: none; /* Hide tables by default */
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .room-table th, .room-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .room-table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="location.href='/add_tenant'">Back</button>
+    <h1>Add Room</h1>
+    <form method="POST" action="{{ url_for('add_room') }}">
+        <input type="text" name="room_name" placeholder="Room Name" required>
+        <input type="number" name="room_capacity" placeholder="Room Capacity" required>
+        <button type="submit">Add Room</button>
+    </form>
+
+    <h2>Room List:</h2>
+    <div id="roomList">
+        {% for room in rooms %}
+        <div class="room-container">
+            <button class="room-button" onclick="showRoomTable('{{ room[2] }}')">{{ room[2] }}</button>
+            <form method="POST" action="{{ url_for('delete_room', room_id=room[0]) }}" style="display:inline;">
+                <button type="submit" class="delete-button">X</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Tables for each room -->
+    {% for room, data in rm_name.items() %}
+    <table id="{{ room }}" class="room-table">
+        <thead>
+            <tr>
+                <th>Tenant Name</th> <!-- Single column header -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+
+    <script>
+        function showRoomTable(roomId) {
+            // Hide all tables first
+            const tables = document.querySelectorAll('.room-table');
+            tables.forEach(table => table.style.display = 'none');
+
+            // Show the table corresponding to the clicked room
+            const roomTable = document.getElementById(roomId);
+            if (roomTable) {
+                roomTable.style.display = 'table';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Update Tenant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='update_tenant.css') }}">
+</head>
+<body>
+    <h1>Update Tenant</h1>
+    <form method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ tenant[2] }}" required>
+        
+        <label for="contact_info">Contact Info:</label>
+        <input type="text" id="contact_info" name="contact_info" value="{{ tenant[3] }}" required>
+        
+        <label for="lease_start">Lease Start:</label>
+        <input type="date" id="lease_start" name="lease_start" value="{{ tenant[4] }}" required>
+        
+        <label for="lease_end">Lease End:</label>
+        <input type="date" id="lease_end" name="lease_end" value="{{ tenant[5] }}" required>
+        
+        <button type="submit" class="btn btn-success">Update Tenant</button>
+        <a href="{{ url_for('add_tenant') }}" class="cancel">Cancel</a>
+    </form>
+</body>
+</html>

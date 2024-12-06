@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Tenant Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+  <div class="container">
+  <div class="overlay">
+    <h3>Add Tenant</h3>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="contact_info" placeholder="Contact Number" required>
+
+        <label for="lease_start">Lease Start</label>
+        <input type="date" id="lease_start" name="lease_start" required>
+        
+        <label for="lease_end">Lease End</label>
+        <input type="date" id="lease_end" name="lease_end" required>
+        <button type="submit">Add Tenant</button>
+    </form>
+    <h3>Search Tenants</h3>
+    <form method="POST">
+        <input type="text" name="search" placeholder="Search by name" value="{{ search_query }}">
+        <button type="submit">Search</button>
+    </form>
+    
+    <br>
+    <h4>Tenants Information</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Contanct Number</th>
+                <th>Lease Start</th>
+                <th>Lease End</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set index = 1 %}
+            {% for tenant in tenants %}
+            <tr>
+                <td>{{ index }}</td>
+                <td>{{ tenant[2] }}</td>
+                <td>{{ tenant[3] }}</td>
+                <td>{{ tenant[4] }}</td>
+                <td>{{ tenant[5] }}</td>
+                <td>
+                    <form action="{{ url_for('update_tenant', tenant_id=tenant[0]) }}" method="GET" style="display:inline;">
+                        <button type="submit" class="b2">Update</button>
+                    </form>
+                
+                    <form action="{{ url_for('delete_tenant', tenant_id=tenant[0]) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="b1">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% set index = index + 1 %}
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+	<div class="text">
+        	<h1><span class="title1">BOARDING HOUSE</span><br><span class="title2">MANAGEMENT</span></h1>
+	<nav>
+	<table cellspacing= "5" cellpadding="5">
+	<tr>
+	<td><a href = "/add_tenant" class= "button-link" >Tenant Management</a>
+	<td><a href = "/add_room" class= "button-link" >Room Management</a>
+	<td><a href = "#" class= "button-link" >Payment Management</a>
+	</table>
+	</nav>
+	</div>
+	<div class= "input">
+	</div>
+    </div>
+
+</body>
+</html>

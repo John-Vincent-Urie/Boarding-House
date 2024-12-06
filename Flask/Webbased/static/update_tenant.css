@@ -1,0 +1,21 @@
+.center-text {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column; 
+    width: 300px; 
+    margin: 20px auto;
+}
+input, button {
+    margin-bottom: 10px;
+    padding: 10px; 
+    font-size: 16px; 
+}
+button {
+    cursor: pointer; 
+}
+.cancel{
+    text-align: center;
+}

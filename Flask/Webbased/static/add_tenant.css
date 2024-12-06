@@ -1,0 +1,75 @@
+.center-text {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column; 
+    width: 300px; 
+    margin: 20px auto;
+}
+input, button {
+    margin-bottom: 10px;
+    padding: 10px; 
+    font-size: 16px; 
+}
+button {
+    cursor: pointer; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Removes space between borders */
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ccc; /* Adds border to table cells */
+    padding: 10px; /* Adds padding inside cells */
+    text-align: center; /* Aligns text to the left */
+}
+th {
+    background-color: #f4f4f4; /* Adds a light background to header cells */
+}
+
+.b1, .b2 {
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.b1 {
+    background-color: rgb(197, 8, 8);
+}
+
+.b2 {
+    background-color: rgb(8, 8, 175);
+}
+
+.b1:hover {
+    background-color: rgb(150, 5, 5);
+}
+
+.b2:hover {
+    background-color: rgb(5, 5, 120);
+}
+.status-container {
+    display: flex;
+    gap: 15px; /* Adds space between the radio buttons and labels */
+    margin: 10px 0; /* Adds some space above and below */
+}
+
+.status-container p {
+    font-weight: bold; /* Makes the "Status:" label bold */
+    margin-bottom: 5px; /* Adds space below the label */
+}
+
+.status-container label {
+    font-size: 16px; /* Matches the font size with inputs */
+    cursor: pointer; /* Makes labels clickable */
+}
+
+.status-container input[type="radio"] {
+    margin-right: 5px; /* Adds space between the radio button and the label text */
+}

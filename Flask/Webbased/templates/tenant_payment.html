@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Payments</title>
+    <style>
+        .table { width: 100%; border-collapse: collapse; }
+        .table th, .table td { padding: 10px; border: 1px solid #ddd; }
+        .table th { background-color: #f2f2f2; }
+        .status-paid { color: green; font-weight: bold; }
+        .status-unpaid { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <button onclick="location.href='/dashboard'">Back</button>
+    <h1>Tenant Payments</h1>
+    <form method="POST">
+        <input type="text" name="search" placeholder="Search by tenant name" value="{{ search_query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Tenants</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Lease Start</th>
+                <th>Lease End</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for tenant in tenants %}
+            <tr>
+                <td>{{ tenant[2] }}</td>
+                <td>{{ tenant[4] }}</td>
+                <td>{{ tenant[5] }}</td>
+                <td>
+                    <span class="status-{{ tenant[6] | lower }}">{{ tenant[6] }}</span>
+                </td>
+                <td>
+                    {% if tenant[6] == 'Unpaid' %}
+                    <form method="POST">
+                        <input type="hidden" name="tenant_id" value="{{ tenant[0] }}">
+                        <input type="number" name="amount_paid" placeholder="Amount Paid" required>
+                        <button type="submit" name="make_payment">Pay</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
